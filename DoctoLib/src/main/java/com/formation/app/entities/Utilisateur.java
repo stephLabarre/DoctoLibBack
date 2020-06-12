@@ -12,7 +12,8 @@ public class Utilisateur implements Serializable {
     private String nom;
     private String prenom;
     private String adresse;
-    private int codePostale;
+    private int codePostal;
+    private String login;
     private String ville;
     private String email;
     private String tel;
@@ -21,12 +22,13 @@ public class Utilisateur implements Serializable {
     public Utilisateur() {
     }
 
-    public Utilisateur(String nom, String prenom, String adresse, int codePostale,
+    public Utilisateur(String nom, String prenom, String adresse, int codePostal, String login,
                        String ville, String email, String tel, String numSecSociale) {
         this.nom = nom;
         this.prenom = prenom;
         this.adresse = adresse;
-        this.codePostale = codePostale;
+        this.codePostal = codePostal;
+        this.login = login;
         this.ville = ville;
         this.email = email;
         this.tel = tel;
@@ -66,13 +68,21 @@ public class Utilisateur implements Serializable {
         this.adresse = adresse;
     }
 
-    public int getCodePostale() {
-        return codePostale;
+    public int getCodePostal() {
+        return codePostal;
     }
 
-    public void setCodePostale(int codePostale) {
-        this.codePostale = codePostale;
+    public void setCodePostal(int codePostal) {
+        this.codePostal = codePostal;
     }
+    public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
 
     public String getVille() {
         return ville;
