@@ -18,12 +18,13 @@ public class Utilisateur implements Serializable {
     private String email;
     private String tel;
     private String numSecSociale;
+    private String mdp;
 
     public Utilisateur() {
     }
 
     public Utilisateur(String nom, String prenom, String adresse, int codePostal, String login,
-                       String ville, String email, String tel, String numSecSociale) {
+                       String ville, String email, String tel, String numSecSociale, String mdp) {
         this.nom = nom;
         this.prenom = prenom;
         this.adresse = adresse;
@@ -33,6 +34,7 @@ public class Utilisateur implements Serializable {
         this.email = email;
         this.tel = tel;
         this.numSecSociale = numSecSociale;
+        this.mdp = mdp;
     }
 
 
@@ -114,5 +116,13 @@ public class Utilisateur implements Serializable {
 
     public void setNumSecSociale(String numSecSociale) {
         this.numSecSociale = numSecSociale;
+    }
+
+    public String getMdp() {
+        return mdp;
+    }
+
+    public void setMdp(String mdp) {
+        this.mdp = mdp;
     }
 }
