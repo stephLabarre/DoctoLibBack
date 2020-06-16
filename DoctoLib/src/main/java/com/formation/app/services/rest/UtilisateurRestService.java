@@ -10,9 +10,9 @@ import java.util.List;
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
 public class UtilisateurRestService {
+
     @Autowired
     UtilisateurMetier utilisateurMetier;
-
     /*
         Request from rest client using /utiliseur with POST method for insert Object.
         RequestBody annotation who allow to map json to object.
@@ -24,7 +24,7 @@ public class UtilisateurRestService {
         return utilisateurMetier.creerUtilisateur(utilisateur);
     }
     /*
-        Request form rest client using /utilisateur/{id} for get object by id.
+        Request from rest client using /utilisateur/{id} for get object by id.
         @PathVariable annotation who allow to map variable json to java variable.
         Exemple : http://localhost:8080/utilisateur/1
      */
@@ -53,7 +53,5 @@ public class UtilisateurRestService {
     public Utilisateur updateUtilisateur(@RequestBody Utilisateur utilisateur){
         return utilisateurMetier.updateUtilisateur(utilisateur);
     }
-
-
 
 }

@@ -2,12 +2,14 @@ package com.formation.app.entities;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.io.Serializable;
+import java.util.Collection;
 
 @Entity
 public class Utilisateur implements Serializable {
-    @Id @GeneratedValue
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String nom;
     private String prenom;
@@ -36,7 +38,6 @@ public class Utilisateur implements Serializable {
         this.numSecSociale = numSecSociale;
         this.mdp = mdp;
     }
-
 
     public int getId() {
         return id;
@@ -125,4 +126,5 @@ public class Utilisateur implements Serializable {
     public void setMdp(String mdp) {
         this.mdp = mdp;
     }
+
 }
