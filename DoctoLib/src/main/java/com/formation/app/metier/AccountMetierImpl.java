@@ -1,9 +1,9 @@
 package com.formation.app.metier;
 
 import com.formation.app.dao.RoleRepository;
-import com.formation.app.dao.UserRepository;
+import com.formation.app.dao.UtilisateurRepository;
 import com.formation.app.entities.Role;
-import com.formation.app.entities.User;
+import com.formation.app.entities.Utilisateur;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -16,16 +16,16 @@ public class AccountMetierImpl implements AccountMetier {
     @Autowired
     RoleRepository roleRepository;
     @Autowired
-    UserRepository userRepository;
+    UtilisateurRepository utilisateurRepository;
 
     @Autowired
     BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Override
-    public User createUser(User user) {
-        String hashPW = bCryptPasswordEncoder.encode(user.getPassword());
-        user.setPassword(hashPW);
-        return userRepository.save(user);
+    public Utilisateur createUser(Utilisateur utilisateur) {
+        String hashPW = bCryptPasswordEncoder.encode(utilisateur.getPassword());
+        utilisateur.setPassword(hashPW);
+        return utilisateurRepository.save(utilisateur);
     }
 
     @Override
@@ -36,14 +36,14 @@ public class AccountMetierImpl implements AccountMetier {
     @Override
     public void addRoleToUser(String username, String roleName) {
         Role role = roleRepository.findRoleByRoleName(roleName);
-        User user = userRepository.findByUsername(username);
-        user.getRoles().add(role);
+        Utilisateur utilisateur = utilisateurRepository.findByUsername(username);
+        utilisateur.getRoles().add(role);
         //userRepository.save(user); // les methodes sont transactionnelle. quand le role est ajouter automatique la base se met à jour
     }
 
     @Override
-    public User findUserByUsername(String username) {
-        return userRepository.findByUsername(username);
+    public Utilisateur findUserByUsername(String username) {
+        return utilisateurRepository.findByUsername(username);
     }
 
     @Override

@@ -1,3 +1,4 @@
+
 package com.formation.app.entities;
 
 import org.springframework.security.core.GrantedAuthority;
@@ -9,33 +10,33 @@ import java.util.Collection;
 import java.util.List;
 
 /*
- * UserDetails is user of Spring
+ * class implement UserDetails interface who is Spring user.
+ * Have some functions and attributes of user.
  */
 public class UserDetailsImpl implements UserDetails {
-    private User user;
+    private Utilisateur utilisateur;
 
-    public UserDetailsImpl(User user){
-        this.user = user;
+    public UserDetailsImpl(Utilisateur utilisateur){
+        this.utilisateur = utilisateur;
     }
-
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         final List<GrantedAuthority> authorities = new ArrayList<
                         GrantedAuthority>();
-        for (final Role role: user.getRoles())
+        for (final Role role: utilisateur.getRoles())
             authorities.add(new SimpleGrantedAuthority(role.getRoleName()));
         return authorities;
     }
 
     @Override
     public String getPassword() {
-        return user.getPassword();
+        return utilisateur.getPassword();
     }
 
     @Override
     public String getUsername() {
-        return user.getUsername();
+        return utilisateur.getUsername();
     }
 
     @Override

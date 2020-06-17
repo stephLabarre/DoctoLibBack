@@ -12,6 +12,9 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+
+import javax.servlet.Filter;
 
 @Configuration
 @EnableWebSecurity
@@ -32,7 +35,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return super.userDetailsService();
     }
 
-
     @Autowired
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
         //service use to load user by name from database
@@ -42,14 +44,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable(); // desactivate csrf
+
+        /*Simple auhentication based on password */
         http.formLogin(); //for use formula by default of Spring
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-        http.authorizeRequests().antMatchers("/login/**", "/saveUtilisateur/**","/registerUser/**").permitAll();
+        http.authorizeRequests().antMatchers("/login/**", "/saveUtilisateur/**").permitAll();
         http.authorizeRequests().antMatchers(HttpMethod.GET, "/utilisateurs/**").hasAnyAuthority("ADMIN");
        // http.cors().and().authorizeRequests().anyRequest().fullyAuthenticated();
         http.authorizeRequests().anyRequest().authenticated();
        // http.httpBasic();
-        http.addFilter(new JWTAuthenticationFilter(authenticationManager()));
+
+        /*we use two filters for authentication based on token */
+        http.addFilter(new JWTAuthenticationFilter(authenticationManager())); // with jwt
+        http.addFilterBefore(new JWTAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class); // with jwt before JWTAuthenticationFilter
     }
 
 

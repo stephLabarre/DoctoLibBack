@@ -16,11 +16,6 @@ public class UtilisateurMetierImpl implements UtilisateurMetier {
     private UtilisateurRepository utilisateurRepository;
 
     @Override
-    public Utilisateur creerUtilisateur(Utilisateur utilisateur) {
-        return utilisateurRepository.save(utilisateur);
-    }
-
-    @Override
     public Utilisateur consulterUtilisateur(int id) {
         // null is the value to be returned if there is no value present
         Utilisateur utilisateur = utilisateurRepository.findById(id).orElse(null);
@@ -41,7 +36,7 @@ public class UtilisateurMetierImpl implements UtilisateurMetier {
             user.setNom(utilisateur.getNom());
             user.setPrenom(utilisateur.getPrenom());
             user.setEmail(utilisateur.getEmail());
-            user.setLogin(utilisateur.getLogin());
+            user.setLogin(utilisateur.getUsername());
             user.setAdresse(utilisateur.getAdresse());
             user.setCodePostal(utilisateur.getCodePostal());
             user.setNumSecSociale(utilisateur.getNumSecSociale());

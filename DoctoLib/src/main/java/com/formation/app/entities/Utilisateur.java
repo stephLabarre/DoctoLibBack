@@ -1,12 +1,13 @@
 package com.formation.app.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import java.io.Serializable;
-import java.util.Collection;
+import lombok.AllArgsConstructor;
 
+import javax.persistence.*;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
+@AllArgsConstructor
 @Entity
 public class Utilisateur implements Serializable {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,28 +16,50 @@ public class Utilisateur implements Serializable {
     private String prenom;
     private String adresse;
     private int codePostal;
-    private String login;
     private String ville;
     private String email;
     private String tel;
     private String numSecSociale;
-    private String mdp;
+    @Column(unique = true)
+    String username;
+    String password;
+
+    @ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.
+            REMOVE }, fetch = FetchType.EAGER)
+    List<Role> roles = new ArrayList<Role>();
 
     public Utilisateur() {
     }
 
-    public Utilisateur(String nom, String prenom, String adresse, int codePostal, String login,
-                       String ville, String email, String tel, String numSecSociale, String mdp) {
+    public Utilisateur(String nom, String prenom, String adresse, int codePostal,
+                       String ville, String email, String tel, String numSecSociale,
+                       String username, String password) {
         this.nom = nom;
         this.prenom = prenom;
         this.adresse = adresse;
         this.codePostal = codePostal;
-        this.login = login;
+        this.username = username;
         this.ville = ville;
         this.email = email;
         this.tel = tel;
         this.numSecSociale = numSecSociale;
-        this.mdp = mdp;
+        this.password = password;
+    }
+
+    public Utilisateur(String nom, String prenom, String adresse, int codePostal,
+                       String ville, String email, String tel, String numSecSociale,
+                       String username, String password, List<Role> roles) {
+        this.nom = nom;
+        this.prenom = prenom;
+        this.adresse = adresse;
+        this.codePostal = codePostal;
+        this.username = username;
+        this.ville = ville;
+        this.email = email;
+        this.tel = tel;
+        this.numSecSociale = numSecSociale;
+        this.password = password;
+        this.roles = roles;
     }
 
     public int getId() {
@@ -78,14 +101,12 @@ public class Utilisateur implements Serializable {
     public void setCodePostal(int codePostal) {
         this.codePostal = codePostal;
     }
-    public String getLogin() {
-        return login;
+
+    public String getUsername() {
+        return username;
     }
 
-    public void setLogin(String login) {
-        this.login = login;
-    }
-
+    public String setUsername( String username){ return this.username = username; }
 
     public String getVille() {
         return ville;
@@ -119,12 +140,20 @@ public class Utilisateur implements Serializable {
         this.numSecSociale = numSecSociale;
     }
 
-    public String getMdp() {
-        return mdp;
+    public String getPassword() {
+        return password;
     }
 
-    public void setMdp(String mdp) {
-        this.mdp = mdp;
+    public void setPassword(String mdp) {
+        this.password = password;
+    }
+
+    public List<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<Role> roles) {
+        this.roles = roles;
     }
 
 }

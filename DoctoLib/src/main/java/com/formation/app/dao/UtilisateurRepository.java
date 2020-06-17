@@ -10,7 +10,7 @@ import java.util.Optional;
 @Repository
 public interface UtilisateurRepository extends JpaRepository<Utilisateur, Integer> {
 
-    @Query("select u from Utilisateur u "+" where u.login = ?1")
-    Optional<Utilisateur> findUtilisateurWithLogin(String login);
+   // @Query("select u from Utilisateur u "+" where u.username = ?1")
+    Utilisateur findByUsername(String username);
 
 }

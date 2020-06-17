@@ -1,7 +1,7 @@
 package com.formation.app;
 
 import com.formation.app.entities.Role;
-import com.formation.app.entities.User;
+import com.formation.app.entities.Utilisateur;
 import com.formation.app.metier.AccountMetier;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -29,13 +29,16 @@ public class AppApplication implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
-        accountMetier.createUser(new User("narcisse", "1233"));
-        accountMetier.createUser(new User("stephane", "1233"));
-        accountMetier.createUser(new User("test", "1233"));
+        accountMetier.createUser(new Utilisateur("kapdjou", "narcisse", "3 boulevard", 95230,
+                "soisy", "narcisse.kapdjou@akka.eu","0785555","02555555","nkapdjou", "1233"));
+        accountMetier.createUser(new Utilisateur("Labarre", "stephane", "3 boulevard", 95230,
+                "soisy", "narcisse.kapdjou@akka.eu","0785555","02555555","slabarre", "1233"));
+        accountMetier.createUser(new Utilisateur("test", "test", "3 boulevard", 95230,
+                "soisy", "narcisse.kapdjou@akka.eu","0785555","02555555","test", "1233"));
         accountMetier.addRole(new Role("ADMIN"));
         accountMetier.addRole(new Role("USER"));
-        accountMetier.addRoleToUser("narcisse", "ADMIN");
-        accountMetier.addRoleToUser("stephane", "ADMIN");
+        accountMetier.addRoleToUser("nkapdjou", "ADMIN");
+        accountMetier.addRoleToUser("slabarre", "ADMIN");
         accountMetier.addRoleToUser("test", "USER");
 
 
