@@ -36,11 +36,12 @@ public class UtilisateurMetierImpl implements UtilisateurMetier {
             user.setNom(utilisateur.getNom());
             user.setPrenom(utilisateur.getPrenom());
             user.setEmail(utilisateur.getEmail());
-            user.setLogin(utilisateur.getUsername());
+            user.setUsername(utilisateur.getUsername());
             user.setAdresse(utilisateur.getAdresse());
             user.setCodePostal(utilisateur.getCodePostal());
             user.setNumSecSociale(utilisateur.getNumSecSociale());
             user.setTel(utilisateur.getTel());
+            user.setPassword(utilisateur.getPassword());
             utilisateurRepository.save(user);
         }catch (NullPointerException e){
             e.printStackTrace();

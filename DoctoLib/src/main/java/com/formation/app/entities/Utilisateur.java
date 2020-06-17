@@ -1,6 +1,7 @@
 package com.formation.app.entities;
 
 import lombok.AllArgsConstructor;
+import lombok.Data;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -9,6 +10,7 @@ import java.util.List;
 
 @AllArgsConstructor
 @Entity
+@Data
 public class Utilisateur implements Serializable {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -106,7 +108,7 @@ public class Utilisateur implements Serializable {
         return username;
     }
 
-    public String setUsername( String username){ return this.username = username; }
+    public String setUsername(String username){ return this.username = username; }
 
     public String getVille() {
         return ville;
@@ -144,7 +146,7 @@ public class Utilisateur implements Serializable {
         return password;
     }
 
-    public void setPassword(String mdp) {
+    public void setPassword(String password) {
         this.password = password;
     }
 
