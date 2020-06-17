@@ -8,17 +8,23 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+/*
+ * UserDetails is user of Spring
+ */
 public class UserDetailsImpl implements UserDetails {
     private User user;
+
     public UserDetailsImpl(User user){
         this.user = user;
     }
+
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         final List<GrantedAuthority> authorities = new ArrayList<
                         GrantedAuthority>();
         for (final Role role: user.getRoles())
-            authorities.add(new SimpleGrantedAuthority(role.getTitre()));
+            authorities.add(new SimpleGrantedAuthority(role.getRoleName()));
         return authorities;
     }
 
@@ -29,7 +35,7 @@ public class UserDetailsImpl implements UserDetails {
 
     @Override
     public String getUsername() {
-        return user.getUserName();
+        return user.getUsername();
     }
 
     @Override

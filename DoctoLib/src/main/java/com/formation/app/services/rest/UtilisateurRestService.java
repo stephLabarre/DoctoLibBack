@@ -1,6 +1,9 @@
 package com.formation.app.services.rest;
 
+import com.formation.app.entities.User;
 import com.formation.app.entities.Utilisateur;
+import com.formation.app.metier.AccountMetier;
+import com.formation.app.metier.RegisterForm;
 import com.formation.app.metier.UtilisateurMetier;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -10,6 +13,8 @@ import java.util.List;
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
 public class UtilisateurRestService {
+    @Autowired
+    AccountMetier accountMetier;
 
     @Autowired
     UtilisateurMetier utilisateurMetier;
@@ -19,7 +24,7 @@ public class UtilisateurRestService {
         Exemple : {"nom":"kapdjou", "prenom":"narcisse", "email":"narcisse@akka.eu", "codePostal":95230, "login":"test","adresse":"3 boulevard",
         "codePostal":95230, "ville":"soisy", "email":"narcisse@akka.eu","tel":"072548855","numSecSociale":"0255444444"}
      */
-    @RequestMapping(value="/utilisateur", method=RequestMethod.POST)
+    @RequestMapping(value="/saveUtilisateur", method=RequestMethod.POST)
     public Utilisateur creerUtilisateur(@RequestBody Utilisateur utilisateur){
         return utilisateurMetier.creerUtilisateur(utilisateur);
     }
@@ -52,6 +57,24 @@ public class UtilisateurRestService {
     @RequestMapping(value="/updateUtilisateur", method=RequestMethod.PUT)
     public Utilisateur updateUtilisateur(@RequestBody Utilisateur utilisateur){
         return utilisateurMetier.updateUtilisateur(utilisateur);
+    }
+
+
+    @RequestMapping(value="/registerUser", method=RequestMethod.POST)
+    public User registerUser(@RequestBody RegisterForm registerForm){
+        if(!registerForm.getPassword().equals(registerForm.getRepassword()))
+            new RuntimeException("make sure password and confirme password are the same");
+        User user = accountMetier.findUserByUsername(registerForm.getUsername());
+        if(user!=null)
+            new RuntimeException("user already exists");
+
+        user = new User();
+        user.setUsername(registerForm.getUsername());
+        user.setPassword(registerForm.getPassword());
+        accountMetier.createUser(user);
+        // role by default
+        accountMetier.addRoleToUser(user.getUsername(), "USER");
+        return user;
     }
 
 }
