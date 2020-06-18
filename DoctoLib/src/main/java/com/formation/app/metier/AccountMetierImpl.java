@@ -38,7 +38,7 @@ public class AccountMetierImpl implements AccountMetier {
         Role role = roleRepository.findRoleByRoleName(roleName);
         Utilisateur utilisateur = utilisateurRepository.findByUsername(username);
         utilisateur.getRoles().add(role);
-        //userRepository.save(user); // les methodes sont transactionnelle. quand le role est ajouter automatique la base se met à jour
+        //userRepository.save(user); // les methodes sont transactionnelles. quand le role est ajouter automatique la base se met à jour
     }
 
     @Override
