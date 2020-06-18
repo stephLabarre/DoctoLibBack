@@ -12,7 +12,6 @@ import java.util.List;
 public class UtilisateurRestService {
     @Autowired
     UtilisateurMetier utilisateurMetier;
-
     /*
         Request from rest client using /utiliseur with POST method for insert Object.
         RequestBody annotation who allow to map json to object.
@@ -54,6 +53,8 @@ public class UtilisateurRestService {
         return utilisateurMetier.updateUtilisateur(utilisateur);
     }
 
-
-
+    @RequestMapping(value="/authentification", method=RequestMethod.GET)
+    public Utilisateur authentificationUtilisateur(@PathVariable String login, @PathVariable String mdp){
+        return utilisateurMetier.searchUtilisateurByLoginAndMdp(login, mdp);
+    }
 }

@@ -25,6 +25,16 @@ public class UtilisateurMetierImpl implements UtilisateurMetier {
         if(utilisateur==null) throw new RuntimeException("utilisateur introuvable"); // exception non surveillée
         return utilisateur;
     }
+
+    @Override
+    public Utilisateur searchUtilisateurByLoginAndMdp(String login, String mdp) {
+        Utilisateur utilisateur =  utilisateurRepository.findByLoginAndMdp(login, mdp);
+        if(utilisateur == null) {
+            return null;
+        }
+        return utilisateur;
+    }
+
     @Override
     public List<Utilisateur> consulterUtilisateurs() {
         return utilisateurRepository.findAll();
@@ -34,7 +44,7 @@ public class UtilisateurMetierImpl implements UtilisateurMetier {
     public Utilisateur updateUtilisateur(Utilisateur utilisateur) {
         // null is the value to be returned if there is no value present
         Utilisateur user = utilisateurRepository.findById(utilisateur.getId()).orElse(null);
-        if(user==null) throw new RuntimeException("utilisateur introuvable"); // exception non surveillée
+        if (user == null) throw new RuntimeException("utilisateur introuvable"); // exception non surveillée
         try {
             user.setNom(utilisateur.getNom());
             user.setPrenom(utilisateur.getPrenom());
@@ -44,8 +54,9 @@ public class UtilisateurMetierImpl implements UtilisateurMetier {
             user.setCodePostal(utilisateur.getCodePostal());
             user.setNumSecSociale(utilisateur.getNumSecSociale());
             user.setTel(utilisateur.getTel());
+            user.setVille(utilisateur.getVille());
             utilisateurRepository.save(user);
-        }catch (NullPointerException e){
+        } catch (NullPointerException e) {
             e.printStackTrace();
         }
         return user;
