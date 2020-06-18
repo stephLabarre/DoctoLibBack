@@ -21,7 +21,7 @@ public class UserDetailServiceImpl implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
             Utilisateur utilisateur = accountMetier.findUserByUsername(username);
-            if (null == utilisateur) //{
+            if (utilisateur==null) //{
                 throw new UsernameNotFoundException("No user named " + username);
             //} else {
                 //return new UserDetailsImpl(user);
@@ -29,12 +29,11 @@ public class UserDetailServiceImpl implements UserDetailsService {
            // }
           // if we dont use UserDetailsImpl
             Collection<GrantedAuthority> authorities = new ArrayList<>();
-        utilisateur.getRoles().forEach(r->{
+            utilisateur.getRoles().forEach(r->{
                 authorities.add(new SimpleGrantedAuthority(r.getRoleName()));
             });
             return new org.springframework.security.core.userdetails.User(utilisateur.getUsername(),
                     utilisateur.getPassword(), authorities);
-            //return new User(user.getUsername(), user.getPassword(), authorities);
     }
 
 

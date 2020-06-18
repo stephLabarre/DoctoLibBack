@@ -19,7 +19,7 @@ public class UtilisateurRestService {
     /*
         Request from rest client using /utiliseur with POST method for insert Object.
         RequestBody annotation who allow to map json to object.
-        Exemple : {"nom":"kapdjou", "prenom":"narcisse", "email":"narcisse@akka.eu", "codePostal":95230, "login":"test","adresse":"3 boulevard",
+        Exemple : {"nom":"kapdjou", "prenom":"narcisse", "email":"narcisse@akka.eu", "codePostal":95230, "username":"nkapdjou", "password" : "1233", "adresse":"3 boulevard",
         "codePostal":95230, "ville":"soisy", "email":"narcisse@akka.eu","tel":"072548855","numSecSociale":"0255444444"}
      */
     @RequestMapping(value="/saveUtilisateur", method=RequestMethod.POST)
@@ -67,7 +67,7 @@ public class UtilisateurRestService {
     }
 
    /*
-    use form with repassword
+    use RegisterForm with repassword
     @RequestMapping(value="/registerUser", method=RequestMethod.POST)
     public User registerUser(@RequestBody RegisterForm registerForm){
         if(!registerForm.getPassword().equals(registerForm.getRepassword()))

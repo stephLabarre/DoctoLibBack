@@ -39,9 +39,9 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         try {
             request.getInputStream();
          Utilisateur utilisateur =  new ObjectMapper().readValue(request.getInputStream(), Utilisateur.class);
-            System.out.println("***********************");
-            System.out.println("username "+utilisateur.getUsername());
-            System.out.println("password "+utilisateur.getPassword());
+            //System.out.println("***********************");
+            //System.out.println("username "+utilisateur.getUsername());
+            //System.out.println("password "+utilisateur.getPassword());
             //return super.attemptAuthentication(request, response); //new ArrayList<>())
             return authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(utilisateur.getUsername(),
                     utilisateur.getPassword()));

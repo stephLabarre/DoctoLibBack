@@ -10,9 +10,10 @@ import java.util.Collection;
 import java.util.List;
 
 /*
- * class implement UserDetails interface who is Spring user.
- * Have some functions and attributes of user.
+ * class implement UserDetails interface who is a Spring User class.
+ * Have some functions and attributes of a User.
  */
+/*
 public class UserDetailsImpl implements UserDetails {
     private Utilisateur utilisateur;
 
@@ -58,4 +59,4 @@ public class UserDetailsImpl implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
-}
+} */
