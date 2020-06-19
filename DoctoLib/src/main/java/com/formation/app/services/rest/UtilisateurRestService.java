@@ -54,7 +54,7 @@ public class UtilisateurRestService {
     }
 
     @RequestMapping(value="/authentification", method=RequestMethod.GET)
-    public Utilisateur authentificationUtilisateur(@PathVariable String login, @PathVariable String mdp){
+    public Utilisateur authentificationUtilisateur(@RequestParam String login, @RequestParam String mdp){
         return utilisateurMetier.searchUtilisateurByLoginAndMdp(login, mdp);
     }
 }
