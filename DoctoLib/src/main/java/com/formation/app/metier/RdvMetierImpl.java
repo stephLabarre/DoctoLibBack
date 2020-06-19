@@ -5,7 +5,8 @@ import com.formation.app.entities.Rdv;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
+import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.List;
 
 @Service
@@ -24,7 +25,9 @@ public class RdvMetierImpl implements RdvMetier {
     }
 
     @Override
-    public List<Rdv> getRdvByJour(Date date) {
-        return rdvRepository.findByStart(date);
+    public List<Rdv> getRdvByJour(Long date) {
+        Date d = new Date(date);
+        List<Rdv> liste = rdvRepository.findByStart(d);
+        return liste;
     }
 }

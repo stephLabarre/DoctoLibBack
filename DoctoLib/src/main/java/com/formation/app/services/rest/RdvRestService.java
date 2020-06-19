@@ -5,7 +5,6 @@ import com.formation.app.metier.RdvMetier;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Date;
 import java.util.List;
 
 @RestController
@@ -25,7 +24,9 @@ public class RdvRestService {
     }
 
     @RequestMapping(value ="/rdvs", method = RequestMethod.GET)
-    public List<Rdv> listeRdv(@RequestParam Date date){
-        return rdvMetier.getRdvByJour(date);
+    public List<Rdv> listeRdv(@RequestParam Long date){
+        System.out.println("DATE:" + date);
+        List<Rdv> rdvs = rdvMetier.getRdvByJour(date);
+        return rdvs;
     }
 }
