@@ -4,11 +4,12 @@ import com.formation.app.entities.Rdv;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-import java.util.Date;
+import java.sql.Date;
 import java.util.List;
 
 
 public interface RdvRepository extends JpaRepository<Rdv, Integer> {
-   @Query("Select r from Rdv r where r.jour = :start")
+   @Query(value = "Select * from Rdv where DATE_FORMAT(start, '%Y-%M-%d') >= DATE_FORMAT(:start, '%Y-%M-%d')",
+           nativeQuery = true)
    public List<Rdv> findByStart(Date start);
 }
