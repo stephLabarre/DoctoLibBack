@@ -5,6 +5,12 @@ import com.formation.app.metier.RdvMetier;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
+
+
 import java.util.List;
 
 @RestController
@@ -25,8 +31,17 @@ public class RdvRestService {
 
     @RequestMapping(value ="/rdvs", method = RequestMethod.GET)
     public List<Rdv> listeRdv(@RequestParam Long date){
-        System.out.println("DATE:" + date);
-        List<Rdv> rdvs = rdvMetier.getRdvByJour(date);
+        System.out.println("ResService -> date recu en timestamp :" + date);
+        Date dateToSend = new Date(date);
+        LocalDate localDate = dateToSend.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        int day = localDate.getDayOfMonth();
+        int month = localDate.getMonthValue();
+        System.out.println("DAY "+day);
+        System.out.println("Month "+month);
+        System.out.println("ResService -> date envoyée en date :" + dateToSend);
+        List<Rdv> rdvs = rdvMetier.getRdvByJour(day, month);
+        System.out.println("liste des rendezvous du jour:");
+        rdvs.forEach(rdv -> System.out.println(rdv.getStart()));
         return rdvs;
     }
 }
